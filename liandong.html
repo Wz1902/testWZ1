@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>三级联动</title>
+<script type="text/javascript">
+	function changeCity(obj){
+		var cityObj = document.getElementById('city');
+		var cityOption = document.createElement('option');
+		cityOption.setAttribute('label', '---请选择---');
+		cityObj.options.length = 1;
+		var cityArr = new Array();
+		cityArr['陕西省'] = ['渭南市','西安市','延安市'];
+		cityArr['四川省'] = ['成都市','绵阳市','广元市'];
+		cityArr['安徽省'] = ['安徽下属1','安徽下属2','安徽下属3'];
+		var provinceText = obj.value;
+		var citys = cityArr[provinceText];
+		for(var i=0; i<citys.length; i++){
+			var newCityOption = document.createElement('option');
+			newCityOption.setAttribute('label', citys[i]);
+			newCityOption.setAttribute('value', citys[i]);
+			cityObj.appendChild(newCityOption);
+		}
+		changeCounty(cityObj);
+	}
+	
+	function changeCounty(obj){
+		var countys = document.getElementById('county');
+		var countyOption = document.createElement('option');
+		countyOption.setAttribute('label', '---请选择---');
+		countys.options.length = 1;
+		var countyArr = new Array();
+		countyArr['渭南市'] = ['澄城县','临渭区','合阳县'];
+		countyArr['西安市'] = ['雁塔区','碑林区','长安区'];
+		countyArr['延安市'] = ['子长县','延长县','安塞县'];
+		countyArr['成都市'] = ['武侯区','大熊猫区','成都下属1'];
+		countyArr['绵阳市'] = ['绵阳市下属1','绵阳市下属2','绵阳市下属3'];
+		countyArr['广元市'] = ['广元市下属1','广元市下属2','广元市下属3'];
+		countyArr['安徽下属1'] = ['安徽1安徽1','安徽1安徽2','安徽1安徽3'];
+		countyArr['安徽下属2'] = ['安徽2安徽1','安徽2安徽2','安徽2安徽3'];
+		countyArr['安徽下属3'] = ['安徽3安徽1','安徽3安徽2','安徽3安徽3'];
+		var cityText = obj.value;
+		var countyText = countyArr[cityText];
+		for(var i=0; i<countyText.length; i++){
+			var newCountyOption = document.createElement('option');
+			newCountyOption.setAttribute('label', countyText[i]);
+			newCountyOption.setAttribute('value', countyText[i]);
+			countys.appendChild(newCountyOption);
+		}
+	}
+</script>
+</head>
+
+<body>
+	<div>
+		<span>省：<select id="province" onchange="changeCity(this)">
+					<option>---请选择---</option>
+					<option value="陕西省">陕西省</option>
+					<option value="四川省">四川省</option>
+					<option value="安徽省">安徽省</option>
+				</select>
+		</span>
+		<span>
+			市：<select id="city" onchange="changeCounty(this)">
+					<option>---请选择---</option>
+			</select>
+		</span>
+		<span>
+			县/区：<select id="county">
+					<option>---请选择---</option>
+			</select>
+		</span>
+	</div>
+</body>
+</html>
